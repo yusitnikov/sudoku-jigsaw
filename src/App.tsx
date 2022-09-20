@@ -4,6 +4,10 @@ import {PlayRoute} from "./PlayRoute";
 
 const router = createHashRouter([
     {
+        path: "/play",
+        element: <PlayRoute/>,
+    },
+    {
         path: "/",
         element: <div>
             <div>
