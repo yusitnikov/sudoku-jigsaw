@@ -1,4 +1,4 @@
-export const zoom = 60;
+export const zoom = 40;
 
 export const thinLine = 0.06;
 export const fatLine = 0.2;

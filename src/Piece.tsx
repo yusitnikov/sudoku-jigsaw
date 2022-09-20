@@ -187,6 +187,8 @@ export const Piece = ({x, y, positionX = 0, positionY = 0, angle = 0, useRef}: {
     </g>
 </g>;
 
+const isPortrait = window.innerWidth < window.innerHeight;
+
 let autoIncrement = 0;
 
 export const DraggablePiece = ({x, y, a, n, i}: typeof allPieces[0] & {i: number}) => {
@@ -194,8 +196,8 @@ export const DraggablePiece = ({x, y, a, n, i}: typeof allPieces[0] & {i: number
     const [angleDiff, setAngleDiff] = useState(0);
 
     const [position, setPosition] = useState(() => ({
-        x: ((i % 10) * 1.5 + 18) * zoom,
-        y: Math.floor(i / 10) * 1.5 * zoom,
+        x: ((i % 10) * 1.5 + (isPortrait ? 0 : 18)) * zoom,
+        y: (Math.floor(i / 10) * 1.5 + (isPortrait ? 18 : 0)) * zoom,
     }));
 
     const [zIndex, setZIndex] = useState(1);
