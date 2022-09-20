@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/sudoku-jigsaw/static/js/main.fe8909a2.js",
+    "index.html": "/sudoku-jigsaw/index.html",
+    "main.fe8909a2.js.map": "/sudoku-jigsaw/static/js/main.fe8909a2.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.fe8909a2.js"
+  ]
+}
