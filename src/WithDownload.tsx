@@ -4,7 +4,7 @@ export const WithDownload = ({fileName, children}: { fileName: string, children:
     const ref = useRef<HTMLDivElement>(null);
 
     const [innerHTML, setInnerHTML] = useState("");
-    useLayoutEffect(() => setInnerHTML(ref.current!.innerHTML));
+    useLayoutEffect(() => setInnerHTML(ref.current!.innerHTML), []);
 
     return <div style={{
         display: "inline-block",

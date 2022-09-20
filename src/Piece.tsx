@@ -9,8 +9,6 @@ import {
 } from "./constants";
 import {allPieces, getColor, getDigit, getDownCoeff, getRightCoeff} from "./field";
 import {indexes} from "./utils";
-import {usePieces} from "./usePieces";
-import {Grid} from "./Grid";
 import Draggable from "react-draggable";
 import {Svg} from "./Svg";
 import {useState} from "react";
