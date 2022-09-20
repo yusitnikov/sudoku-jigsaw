@@ -4,21 +4,21 @@ import {indexes} from "./utils";
 const field = `
 4>9<3>1>0>2<6>8<5<7
 V A A A V A A A A V
-6<7>8>0>1>3<5<9>4<2
-V V A A V A A A A A
+6<7>8>0>1>3<5<9<4<2
+V V A A V A A A V A
 0>2>9<5<7>6>1<4<3<8
-V V V V A A V V A A
+V V V V A A V V V A
 1>8<2>4>5<9<7<3<6<0
 A A A V A V V A V A
 3<5<6<7<8>4>0>2>9>1
 A V A A V A V A A V
 7>0>4>8>9>5>3<1>2<6
 A A V V A A A V V A
-2>3<5<6>4>1<8>0>7<9
+2>3<5>6<4>1<8>0>7<9
 V V A V A A A A A A
-5>1>7<9<2>0<4<6<8>3
-V A A V V V V A V A
-9<4<1<3>6<8<2>7>0<5
+5>1>7>9>2>0<4<6<8<3
+V A A V V V A A V A
+9<4<1>3>6<8<2>7>0<5
 V V A V V A V A A V
 8<6>0<2>3<7>9<5>1>4
 `.trim().split("\n");
