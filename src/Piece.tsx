@@ -135,7 +135,13 @@ export const digitDefs = <defs>
     }))}
 </defs>;
 
-export const Piece = ({x, y, positionX = 0, positionY = 0, angle = 0, useRef}: {x: number, y: number, positionX?: number, positionY?: number, angle?: number, useRef?: boolean}) => <g
+export interface PiecePosition {
+    positionX?: number;
+    positionY?: number;
+    angle?: number;
+}
+
+export const Piece = ({x, y, positionX = 0, positionY = 0, angle = 0, useRef}: PiecePosition & {x: number, y: number, useRef?: boolean}) => <g
     transform={`translate(${positionX} ${positionY}) translate(0.5 0.5) rotate(${angle}) translate(-0.5 -0.5)`}
 >
     <defs>
@@ -187,28 +193,31 @@ export const Piece = ({x, y, positionX = 0, positionY = 0, angle = 0, useRef}: {
     </g>
 </g>;
 
-const isPortrait = window.innerWidth < window.innerHeight;
-
-let autoIncrement = 0;
-
-export const DraggablePiece = ({x, y, a, n, i}: typeof allPieces[0] & {i: number}) => {
+export const DraggablePiece = (
+    {
+        x,
+        y,
+        a,
+        n,
+        positionX = 0,
+        positionY = 0,
+        angle = 0,
+        zIndex,
+        onChange,
+    }: typeof allPieces[0] & PiecePosition & {
+        zIndex: number,
+        onChange: (changes: {x?: number, y?: number, a?: number, z?: boolean}) => void,
+    }
+) => {
     const [isDragging, setIsDragging] = useState(false);
-    const [angleDiff, setAngleDiff] = useState(0);
-
-    const [position, setPosition] = useState(() => ({
-        x: ((i % 10) * 1.5 + (isPortrait ? 0 : 18)) * zoom,
-        y: (Math.floor(i / 10) * 1.5 + (isPortrait ? 18 : 0)) * zoom,
-    }));
-
-    const [zIndex, setZIndex] = useState(1);
 
     return <Draggable
-        position={position}
-        onStart={() => setZIndex(++autoIncrement)}
+        position={{x: positionX, y: positionY}}
+        onStart={() => onChange({z: true})}
         onDrag={() => setIsDragging(true)}
         onStop={(_, {x, y}) => {
             if (!isDragging && [0, 6, 8, 9].includes(n)) {
-                setAngleDiff(angle => angle + 180);
+                onChange({a: angle + 180});
             }
             setIsDragging(false);
 
@@ -227,7 +236,7 @@ export const DraggablePiece = ({x, y, a, n, i}: typeof allPieces[0] & {i: number
             y *= zoom;
             x += margin;
             y += margin;
-            setPosition({x, y});
+            onChange({x, y});
         }}
     >
         <span style={{
@@ -240,7 +249,7 @@ export const DraggablePiece = ({x, y, a, n, i}: typeof allPieces[0] & {i: number
                 size={1}
                 margin={height}
                 style={{
-                    transform: `rotate(${a + angleDiff}deg)`,
+                    transform: `rotate(${a + angle}deg)`,
                     transition: "transform 0.3s",
                     cursor: "pointer",
                 }}
