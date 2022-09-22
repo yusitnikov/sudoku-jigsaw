@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/sudoku-jigsaw/static/js/main.2f4c7e0e.js",
+    "main.js": "/sudoku-jigsaw/static/js/main.bab20ca9.js",
     "index.html": "/sudoku-jigsaw/index.html",
-    "main.2f4c7e0e.js.map": "/sudoku-jigsaw/static/js/main.2f4c7e0e.js.map"
+    "main.bab20ca9.js.map": "/sudoku-jigsaw/static/js/main.bab20ca9.js.map"
   },
   "entrypoints": [
-    "static/js/main.2f4c7e0e.js"
+    "static/js/main.bab20ca9.js"
   ]
 }
