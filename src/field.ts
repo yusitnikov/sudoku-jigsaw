@@ -13,13 +13,13 @@ A A A V A V V A V A
 3<5<6<7<8>4>0>2>9>1
 A V A A V A V A A V
 7>0>4>8>9>5>3<1>2<6
-A A V V A A A V V A
+A A V V A A A A V A
 2>3<5>6<4>1<8>0>7<9
 V V A V A A A A A A
 5>1>7>9>2>0<4<6<8<3
-V A A V V V A A V A
+V A A V V A A A V A
 9<4<1>3>6<8<2>7>0<5
-V V A V V A V A A V
+V V A V V V V V A V
 8<6>0<2>3<7>9<5>1>4
 `.trim().split("\n");
 export const getDigit = (x: number, y: number) => Number(field[y * 2][x * 2]);
