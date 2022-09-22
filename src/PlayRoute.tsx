@@ -2,12 +2,14 @@ import {usePieces} from "./usePieces";
 import {Grid} from "./Grid";
 import {DraggablePiece} from "./Piece";
 import {zoom} from "./constants";
-import {useMemo} from "react";
+import {useMemo, useState} from "react";
 import {useLocalStorage} from "./useLocalStorage";
 import {useWindowSize} from "./useWindowSize";
 
 export const PlayRoute = () => {
-    const pieces = usePieces(false);
+    const [isShuffled, setIsShuffled] = useLocalStorage("shuffle", true);
+
+    const pieces = usePieces(isShuffled);
 
     const {isPortrait} = useWindowSize();
 
@@ -21,9 +23,30 @@ export const PlayRoute = () => {
 
     const maxZIndex = useMemo(() => Math.max(...positions.map(({z}) => z)), [positions]);
 
+    const [allowAnimation, setAllowAnimation] = useState(true);
+    const resetGame = () => {
+        resetPositions();
+        setAllowAnimation(false);
+        setTimeout(() => setAllowAnimation(true), 100);
+    };
+
     return <div style={{position: "relative"}}>
-        <div style={{position: "absolute", margin: "0.5em", zIndex: maxZIndex + 1}}>
-            <button type={"button"} onClick={resetPositions}>Reset</button>
+        <div style={{position: "absolute", display: "flex", alignItems: "center", margin: "0.5em", zIndex: maxZIndex + 1}}>
+            <button type={"button"} onClick={resetGame}>Reset</button>
+
+            &nbsp;
+
+            <input
+                id={"shuffle"}
+                type={"checkbox"}
+                checked={!isShuffled}
+                onChange={({target: {checked}}) => {
+                    setIsShuffled(!checked);
+                    resetGame();
+                }}
+            />
+
+            <label htmlFor={"shuffle"}>sorted</label>
         </div>
 
         <div style={{padding: zoom * 4, opacity: 0.5}}>
@@ -40,7 +63,8 @@ export const PlayRoute = () => {
                 positionY={y}
                 angle={a}
                 zIndex={z}
-            onChange={({z, ...positionUpdates}) => setPositions(positions => [
+                animate={allowAnimation}
+                onChange={({z, ...positionUpdates}) => setPositions(positions => [
                     ...positions.slice(0, i),
                     {
                         ...positions[i],

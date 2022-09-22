@@ -56,5 +56,5 @@ export const allPieces = indexes(10).flatMap(y => indexes(10).map(x => {
 }));
 
 export const sortedPieces = [...allPieces].sort(
-    (a, b) => a.c.localeCompare(b.c) || a.nn - b.nn || Math.sign(a.rnd - b.rnd) || a.x - b.x || a.y - b.y
+    (a, b) => b.c.localeCompare(a.c) || a.nn - b.nn || Math.sign(a.rnd - b.rnd) || a.x - b.x || a.y - b.y
 );

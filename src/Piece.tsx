@@ -204,9 +204,11 @@ export const DraggablePiece = (
         angle = 0,
         zIndex,
         onChange,
+        animate,
     }: typeof allPieces[0] & PiecePosition & {
         zIndex: number,
         onChange: (changes: {x?: number, y?: number, a?: number, z?: boolean}) => void,
+        animate: boolean,
     }
 ) => {
     const [isDragging, setIsDragging] = useState(false);
@@ -250,7 +252,7 @@ export const DraggablePiece = (
                 margin={height}
                 style={{
                     transform: `rotate(${a + angle}deg)`,
-                    transition: "transform 0.3s",
+                    transition: animate ? "transform 0.3s" : undefined,
                     cursor: "pointer",
                 }}
             >
